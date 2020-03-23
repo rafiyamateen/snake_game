@@ -1,0 +1,20 @@
+body {
+    height: 650px;
+    margin: 0;
+    background-image: url(game.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 650px;
+    display: flex;
+}
+div{
+    align-self:flex-end;
+    padding:100px
+}
+button{
+    background-color: rgb(146, 151, 77);
+    width: 200px;
+    height: 70px;
+    font-size: 35px;
+    color: white;
+    border-radius: 10px;
+}
