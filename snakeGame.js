@@ -51,7 +51,9 @@ function foodFn(x, y) {
     context.strokeStyle = "rgb(68, 146, 23)";
     context.strokeRect(x * 10, y * 10, 10, 10);
 }
+let sound = document.getElementById('game');
 function start() {
+    sound.play();
     context.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < snake.length; i++) {
         let X = snake[i].x,
@@ -83,6 +85,8 @@ function start() {
     }
     let newHead;
     if (snakeX == food.x && snakeY == food.y) {
+        let eat = document.getElementById('eat');
+        eat.play();
         food = {
             x: Math.floor(Math.random() * (canvas.width / 10 - 1) + 1),
             y: Math.floor(Math.random() * (canvas.height / 10 - 1) + 1)
@@ -102,13 +106,17 @@ function start() {
         }
     }
     if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width / 10 || snakeY >= canvas.height / 10 || collision(newHead, snake)) {
+        sound.pause();
         clearInterval(game);
+        let over = document.getElementById('gameOver');
+        over.play();
         document.getElementById('over').style.display = 'block';
     }
     snake.unshift(newHead);
 }
 let game = setInterval(start, 100);
 document.getElementsByTagName('button')[0].onclick = () => {
+    sound.pause();
     clearInterval(game);
 }
 document.getElementsByTagName('button')[1].onclick = () => {
