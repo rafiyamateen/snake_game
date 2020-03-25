@@ -1,6 +1,6 @@
 const canvas = document.getElementById('snake'),
     context = canvas.getContext('2d');
-function drawSnake(x, y) {
+function snakeFn(x, y) {
     context.fillStyle = "white";
     context.fillRect(x * 10, y * 10, 10, 10);
     context.strokeStyle = "black";
@@ -9,15 +9,25 @@ function drawSnake(x, y) {
 let snakeLength = 4,
     snake = [],
     score = 0;
-for (let i = snakeLength; i > 0; i--) {
+for (let i = snakeLength - 1; i >= 0; i--) {
     snake.push({
         x: i,
         y: 0
     })
 }
 let dir = "right";
-document.addEventListener('keydown', direction);
-function direction(event) {
+if (screen.width < 600) {
+    let arrows = document.querySelectorAll('.fas');
+    for (let i = 0; i < arrows.length; i++) {
+        arrows[i].style.display = 'inline-block';
+    }
+    document.getElementById('up').addEventListener('click', () => { if (dir != 'down') { dir = 'up' } });
+    document.getElementById('left').addEventListener('click', () => { if (dir != 'right') { dir = 'left' } });
+    document.getElementById('right').addEventListener('click', () => { if (dir != 'left') { dir = 'right' } });
+    document.getElementById('down').addEventListener('click', () => { if (dir != 'up') { dir = 'down' } });
+}
+document.addEventListener('keydown', dirFn);
+function dirFn(event) {
     if (event.keyCode == 37 && dir != "right") {
         dir = "left";
     }
@@ -32,28 +42,26 @@ function direction(event) {
     }
 }
 let food = {
-    x: Math.floor(Math.random() * 59 + 1),
-    y: Math.floor(Math.random() * 54 + 1)
+    x: Math.floor(Math.random() * (canvas.width / 10 - 1) + 1),
+    y: Math.floor(Math.random() * (canvas.height / 10 - 1) + 1)
 }
-function drawFood(x, y) {
+function foodFn(x, y) {
     context.fillStyle = "red";
     context.fillRect(x * 10, y * 10, 10, 10);
     context.strokeStyle = "rgb(68, 146, 23)";
     context.strokeRect(x * 10, y * 10, 10, 10);
 }
-function draw() {
+function start() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < snake.length; i++) {
-        let X = snake[i].x;
-        let Y = snake[i].y;
-        drawSnake(X, Y);
+        let X = snake[i].x,
+            Y = snake[i].y;
+        snakeFn(X, Y);
     }
-    drawFood(food.x, food.y);
+    foodFn(food.x, food.y);
     let snakeX = snake[0].x,
         snakeY = snake[0].y;
-
     function collision(newHead, snake) {
-
         for (let i = 0; i < snake.length; i++) {
             if (newHead.x == snake[i].x && newHead.y == snake[i].y) {
                 return true;
@@ -76,8 +84,8 @@ function draw() {
     let newHead;
     if (snakeX == food.x && snakeY == food.y) {
         food = {
-            x: Math.floor(Math.random() * 59 + 1),
-            y: Math.floor(Math.random() * 59 + 1)
+            x: Math.floor(Math.random() * (canvas.width / 10 - 1) + 1),
+            y: Math.floor(Math.random() * (canvas.height / 10 - 1) + 1)
         }
         newHead = {
             x: snakeX,
@@ -93,16 +101,16 @@ function draw() {
             y: snakeY
         }
     }
-    if (snakeX < 0 || snakeY < 0 || snakeX >= 60 || snakeY >= 55 || collision(newHead, snake)) {
+    if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width / 10 || snakeY >= canvas.height / 10 || collision(newHead, snake)) {
         clearInterval(game);
-        document.getElementById('over').style.display='block';
+        document.getElementById('over').style.display = 'block';
     }
     snake.unshift(newHead);
 }
-let game = setInterval(draw, 100);
-document.getElementsByTagName('button')[0].onclick=()=>{
+let game = setInterval(start, 100);
+document.getElementsByTagName('button')[0].onclick = () => {
     clearInterval(game);
 }
-document.getElementsByTagName('button')[1].onclick=()=>{
-location.reload();
+document.getElementsByTagName('button')[1].onclick = () => {
+    location.reload();
 }

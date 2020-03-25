@@ -1,7 +1,7 @@
 body {
     height: 650px;
     margin: 0;
-    background-image: url(game.jpg);
+    background-image: url(images/game.jpg);
     background-repeat: no-repeat;
     background-size: 100% 650px;
     display: flex;
@@ -11,10 +11,14 @@ div{
     padding:100px
 }
 button{
-    background-color: rgb(146, 151, 77);
+    background-color: rgb(105, 139, 41);
     width: 200px;
     height: 70px;
     font-size: 35px;
     color: white;
     border-radius: 10px;
 }
+    div{
+        margin: auto;
+        margin-bottom: 10%;
+    }

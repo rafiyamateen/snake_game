@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
+    <script src="https://kit.fontawesome.com/2e67fd70d7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <p>Score: <span>0</span><button>Stop</button><button>Restart</button></p>
-    <canvas id="snake" width="600" height="550">
+    <canvas id="snake" width='600' height='550'>
     </canvas>
     <p id="over">Game Over</p>
+    <div>
+        <div class="up"><i id="up" class="fas fa-arrow-circle-up"></i></div>
+        <div><i id="left" class="fas fa-arrow-circle-left"></i>
+            <i id="down" class="fas fa-arrow-circle-down"></i>
+            <i id="right" class="fas fa-arrow-circle-right"></i></div>
+    </div>
     <script src="snakeGame.js"></script>
 </body>
+
 </html>
