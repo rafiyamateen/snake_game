@@ -113,6 +113,11 @@ function start() {
         document.getElementById('over').style.display = 'block';
     }
     snake.unshift(newHead);
+    let highScore = JSON.parse(localStorage.getItem('highScore')) || 0; console.log(highScore < score);
+    if (highScore < score) {
+        localStorage.setItem('highScore', JSON.stringify(score))
+    }
+    document.getElementsByTagName('span')[1].innerHTML = highScore;
 }
 let game = setInterval(start, 100);
 document.getElementsByTagName('button')[0].onclick = () => {

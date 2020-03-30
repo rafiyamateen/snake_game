@@ -56,6 +56,9 @@ body> div{
     margin: 5px 10px;
     display: none;
 }
+span{
+    margin-right: 20px;
+}
 @media screen and (max-width:700px){
     body{
         width: 100%;        
@@ -69,11 +72,31 @@ body> div{
     p,button{
        font-size: 25px;
     }
+    p{
+        margin-left: 15px;
+    }
+    button{
+        margin-right: 15px;
+    }
+}
+@media screen and (max-width:530px){
+    p,button{
+        font-size: 20px;
+     } 
+     span{
+        margin-right: 10px;
+    }
 }
 @media screen and (max-width:430px){
     p,button{
         font-size: 19px;
-     }
+    }
+     p{
+        margin-left: 0px;
+    }
+    button{
+        margin-right: 0px;
+    }
      canvas{
          margin-top: -1%;
      }
